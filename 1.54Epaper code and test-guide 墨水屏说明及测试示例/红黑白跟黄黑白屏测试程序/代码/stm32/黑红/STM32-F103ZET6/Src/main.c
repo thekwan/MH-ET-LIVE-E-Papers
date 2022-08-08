@@ -17,7 +17,7 @@
 #include "EPD_1in54b.h"
 #include "DEV_Config.h"
 #include "GUI_Paint.h"
-#include "imagedata.h"
+#include "ImageData.h"
 #include <stdlib.h>
 /* USER CODE END Includes */
 
