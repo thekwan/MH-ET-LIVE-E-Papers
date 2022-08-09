@@ -124,7 +124,7 @@ int main(void)
     Paint_DrawRectangle(20, 10, 70, 60, BLACK, DRAW_FILL_EMPTY, DOT_PIXEL_1X1);
     Paint_DrawCircle(170, 85, 20, BLACK, DRAW_FILL_FULL, DOT_PIXEL_1X1);
     Paint_DrawString_EN(5, 70, "hello world", &Font16, WHITE, BLACK);
-    Paint_DrawString_CN(5, 160, "ÑÅºÚ×ÖÌå", &Font24CN, WHITE, BLACK);
+    //Paint_DrawString_CN(5, 160, "ÑÅºÚ×ÖÌå", &Font24CN, WHITE, BLACK);
     
     Paint_SelectImage(RedImage);
     Paint_Clear(WHITE);
@@ -136,7 +136,7 @@ int main(void)
     Paint_DrawCircle(170, 35, 20, BLACK, DRAW_FILL_EMPTY, DOT_PIXEL_1X1);    
     Paint_DrawString_EN(5, 90, "MH-ET LIVE", &Font20, BLACK, WHITE);
     Paint_DrawNum(5, 120, 123456789, &Font20, BLACK, WHITE);
-    Paint_DrawString_CN(5, 135,"ÄãºÃabc", &Font12CN, BLACK, WHITE);
+    //Paint_DrawString_CN(5, 135,"ÄãºÃabc", &Font12CN, BLACK, WHITE);
 
     EPD_Display(BlackImage, RedImage);
     DEV_Delay_ms(2000);

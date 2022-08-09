@@ -32,6 +32,35 @@ SRCS += ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_adc.c    
         ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_usb.c    \
         ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_utils.c  \
         ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c       \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c   \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_can.c   \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cec.c   \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c\
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_crc.c   \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dac.c   \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c   \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_eth.c   \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c  \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_hcd.c   \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.c   \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2s.c   \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_irda.c  \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_iwdg.c  \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_mmc.c   \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_nand.c  \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_nor.c   \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pccard.c\
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd.c   \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c   \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c   \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc.c   \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_sd.c    \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi.c   \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_sram.c  \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c   \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c  \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_usart.c \
+        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_wwdg.c  \
         ${STM32CUBE_DIR}/User/Config/DEV_Config.c                               \
         ${STM32CUBE_DIR}/User/e-Paper/EPD_1in54b.c                              \
         ${STM32CUBE_DIR}/User/e-Paper/ImageData.c                               \
@@ -41,6 +70,11 @@ SRCS += ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_adc.c    
         ${STM32CUBE_DIR}/User/Fonts/font24.c                                    \
         ${STM32CUBE_DIR}/User/Fonts/font8.c                                     \
         ${STM32CUBE_DIR}/User/GUI/GUI_Paint.c
+
+        #${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_timebase_rtc_alarm_template.c  \
+        #${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_timebase_tim_template.c        \
+        #${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_msp_template.c\
+        #${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c \
 
 # Binaries will be generated with this name (.elf, .bin, .hex, etc)
 PROJ_NAME=epaper
