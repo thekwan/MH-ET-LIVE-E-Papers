@@ -2,86 +2,85 @@
 # Put your stlink folder here so make burn will work.
 STLINK=/home/thekwan/Work/STM32/stlink
 
+vpath %.c  Src                                 \
+	       Drivers/STM32F1xx_HAL_Driver/Src    \
+	       User/Config                         \
+	       User/e-Paper                        \
+	       User/Fonts                          \
+	       User/GUI                            \
+
 # Put your source files here (or *.c, etc)
-SRCS = Src/main.c                      \
-       Src/gpio.c                      \
-       Src/spi.c                       \
-       Src/usart.c                     \
-       Src/stm32f1xx_hal_msp.c         \
-       Src/stm32f1xx_it.c              \
-       Src/system_stm32f1xx.c
- 
+SRCS = main.c                      \
+       gpio.c                      \
+       spi.c                       \
+       usart.c                     \
+       stm32f1xx_hal_msp.c         \
+       stm32f1xx_it.c              \
+       system_stm32f1xx.c          \
+       stm32f1xx_ll_adc.c          \
+       stm32f1xx_ll_crc.c          \
+       stm32f1xx_ll_dac.c          \
+       stm32f1xx_ll_dma.c          \
+       stm32f1xx_ll_exti.c         \
+       stm32f1xx_ll_fsmc.c         \
+       stm32f1xx_ll_gpio.c         \
+       stm32f1xx_ll_i2c.c          \
+       stm32f1xx_ll_pwr.c          \
+       stm32f1xx_ll_rcc.c          \
+       stm32f1xx_ll_rtc.c          \
+       stm32f1xx_ll_sdmmc.c        \
+       stm32f1xx_ll_spi.c          \
+       stm32f1xx_ll_tim.c          \
+       stm32f1xx_ll_usart.c        \
+       stm32f1xx_ll_usb.c          \
+       stm32f1xx_ll_utils.c        \
+       stm32f1xx_hal.c             \
+       stm32f1xx_hal_adc.c         \
+       stm32f1xx_hal_can.c         \
+       stm32f1xx_hal_cec.c         \
+       stm32f1xx_hal_cortex.c      \
+       stm32f1xx_hal_crc.c         \
+       stm32f1xx_hal_dac.c         \
+       stm32f1xx_hal_dma.c         \
+       stm32f1xx_hal_eth.c         \
+       stm32f1xx_hal_gpio.c        \
+       stm32f1xx_hal_hcd.c         \
+       stm32f1xx_hal_i2c.c         \
+       stm32f1xx_hal_i2s.c         \
+       stm32f1xx_hal_irda.c        \
+       stm32f1xx_hal_iwdg.c        \
+       stm32f1xx_hal_mmc.c         \
+       stm32f1xx_hal_nand.c        \
+       stm32f1xx_hal_nor.c         \
+       stm32f1xx_hal_pccard.c      \
+       stm32f1xx_hal_pcd.c         \
+       stm32f1xx_hal_pwr.c         \
+       stm32f1xx_hal_rcc.c         \
+       stm32f1xx_hal_rtc.c         \
+       stm32f1xx_hal_sd.c          \
+       stm32f1xx_hal_spi.c         \
+       stm32f1xx_hal_sram.c        \
+       stm32f1xx_hal_tim.c         \
+       stm32f1xx_hal_uart.c        \
+       stm32f1xx_hal_usart.c       \
+       stm32f1xx_hal_wwdg.c        \
+       DEV_Config.c                \
+       EPD_1in54b.c                \
+       ImageData.c                 \
+       font12.c                    \
+       font16.c                    \
+       font20.c                    \
+       font24.c                    \
+       font8.c                     \
+       GUI_Paint.c
 
-# Library code
-STM32CUBE_DIR=.
-SRCS += ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_adc.c    \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_crc.c    \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_dac.c    \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_dma.c    \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_exti.c   \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_fsmc.c   \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_gpio.c   \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_i2c.c    \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_pwr.c    \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_rcc.c    \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_rtc.c    \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_sdmmc.c  \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_spi.c    \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c    \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_usart.c  \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_usb.c    \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_utils.c  \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c       \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c   \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_can.c   \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cec.c   \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c\
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_crc.c   \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dac.c   \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c   \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_eth.c   \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c  \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_hcd.c   \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.c   \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2s.c   \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_irda.c  \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_iwdg.c  \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_mmc.c   \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_nand.c  \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_nor.c   \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pccard.c\
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd.c   \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c   \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c   \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc.c   \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_sd.c    \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi.c   \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_sram.c  \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c   \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c  \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_usart.c \
-        ${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_wwdg.c  \
-        ${STM32CUBE_DIR}/User/Config/DEV_Config.c                               \
-        ${STM32CUBE_DIR}/User/e-Paper/EPD_1in54b.c                              \
-        ${STM32CUBE_DIR}/User/e-Paper/ImageData.c                               \
-        ${STM32CUBE_DIR}/User/Fonts/font12.c                                    \
-        ${STM32CUBE_DIR}/User/Fonts/font16.c                                    \
-        ${STM32CUBE_DIR}/User/Fonts/font20.c                                    \
-        ${STM32CUBE_DIR}/User/Fonts/font24.c                                    \
-        ${STM32CUBE_DIR}/User/Fonts/font8.c                                     \
-        ${STM32CUBE_DIR}/User/GUI/GUI_Paint.c
-
-        #${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_timebase_rtc_alarm_template.c  \
-        #${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_timebase_tim_template.c        \
-        #${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_msp_template.c\
-        #${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c \
+       #stm32f1xx_hal_timebase_rtc_alarm_template.c  \
+       #stm32f1xx_hal_timebase_tim_template.c        \
+       #stm32f1xx_hal_msp_template.c\
+       #stm32f1xx_hal_flash.c \
 
 # Binaries will be generated with this name (.elf, .bin, .hex, etc)
 PROJ_NAME=epaper
-
-# Put your STM32F4 library code directory here
-#STM_COMMON=/home/thekwan/Work/STM32/Projects/STM32Cube_FW_F4_V1.10.0
-#STM_COMMON=../../../../..
 
 # Normally you shouldn't need to change anything below this line!
 #######################################################################################
@@ -89,7 +88,7 @@ PROJ_NAME=epaper
 CC=arm-none-eabi-gcc
 OBJCOPY=arm-none-eabi-objcopy
 
-#CFLAGS  = -T./SW4STM32/STM32F103RB-Nucleo/STM32F103RBTx_FLASH.ld
+LDFLAGS = -TDrivers/STM32F103RBTx_FLASH.ld
 CFLAGS += -lc -lm -lnosys
 CFLAGS += -mcpu=cortex-m3
 CFLAGS += -mthumb
@@ -104,20 +103,20 @@ CFLAGS += -fno-strict-aliasing
 CFLAGS += -Wno-unused-const-variable
 #CFLAGS += -specs=nano.specs
 CFLAGS += -specs=nosys.specs
-CFLAGS += -O0
+CFLAGS += -Os
 CFLAGS += -g
 CFLAGS += -DUSE_FULL_LL_DRIVER
 #CFLAGS += -DUSE_FULL_ASSERT
 CFLAGS += -DSTM32F103xB
 
 # Include files from STM libraries
-CFLAGS += -I${STM32CUBE_DIR}/Drivers/STM32F1xx_HAL_Driver/Inc
-CFLAGS += -I${STM32CUBE_DIR}/Drivers/CMSIS/Device/ST/STM32F1xx/Include
-CFLAGS += -I${STM32CUBE_DIR}/Drivers/CMSIS/Include
-CFLAGS += -I${STM32CUBE_DIR}/User/Config
-CFLAGS += -I${STM32CUBE_DIR}/User/e-Paper
-CFLAGS += -I${STM32CUBE_DIR}/User/Fonts
-CFLAGS += -I${STM32CUBE_DIR}/User/GUI
+CFLAGS += -IDrivers/STM32F1xx_HAL_Driver/Inc
+CFLAGS += -IDrivers/CMSIS/Device/ST/STM32F1xx/Include
+CFLAGS += -IDrivers/CMSIS/Include
+CFLAGS += -IUser/Config
+CFLAGS += -IUser/e-Paper
+CFLAGS += -IUser/Fonts
+CFLAGS += -IUser/GUI
 CFLAGS += -IInc
 
 # only_one_usart_mode
@@ -131,7 +130,8 @@ CFLAGS += -IInc
 # Includes
 # ..
 ###################################################
-
+OBJDIR=objs
+OBJS=$(patsubst %,$(OBJDIR)/%,$(SRCS:.c=.o))
 
 # add startup file to build
 #OBJS = $(SRCS:.c=.o)
@@ -142,14 +142,19 @@ all: proj
 
 proj: $(PROJ_NAME).elf
 
-#$(PROJ_NAME).elf: $(OBJS)
-$(PROJ_NAME).elf: $(SRCS)
-	$(CC) $(CFLAGS) $^ -o $@ 
-	$(OBJCOPY) -O ihex $(PROJ_NAME).elf $(PROJ_NAME).hex
-	$(OBJCOPY) -O binary $(PROJ_NAME).elf $(PROJ_NAME).bin
+$(OBJDIR)/%.o: %.c
+	@mkdir -p $(OBJDIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo 'CC $@'
+
+$(PROJ_NAME).elf: $(OBJS)
+	@echo 'LD $@'
+	@$(CC) $(CFLAGS) -o $@ $^ Drivers/startup_stm32f103xb.s $(LDFLAGS)
+	@$(OBJCOPY) -O ihex $(PROJ_NAME).elf $(PROJ_NAME).hex
+	@$(OBJCOPY) -O binary $(PROJ_NAME).elf $(PROJ_NAME).bin
 
 clean:
-	rm -f *.o $(PROJ_NAME).elf $(PROJ_NAME).hex $(PROJ_NAME).bin
+	rm -rf *.o $(PROJ_NAME).elf $(PROJ_NAME).hex $(PROJ_NAME).bin $(OBJDIR)
 
 # Flash the STM32F4
 burn: proj
