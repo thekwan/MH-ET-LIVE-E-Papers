@@ -36,8 +36,10 @@
 #include "DEV_Config.h"
 
 // Display resolution
-#define EPD_WIDTH       200
-#define EPD_HEIGHT      200
+//#define EPD_WIDTH       212
+//#define EPD_HEIGHT      104
+#define EPD_WIDTH       104
+#define EPD_HEIGHT      212
 
 // EPD1IN54B commands
 #define PANEL_SETTING                               0x00

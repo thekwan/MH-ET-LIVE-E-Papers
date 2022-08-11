@@ -71,6 +71,16 @@ int main(void)
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   MX_SPI1_Init();
+
+#if 0
+  // LED and UART check routine. (ONLY FOR DEBUG)
+  while(1) {
+      printf("a"); 
+      HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+      DEV_Delay_ms(500);
+  }
+#endif
+
   /* USER CODE BEGIN 2 */	
 	
     printf("epd init and clear------------------------\r\n");
@@ -101,7 +111,7 @@ int main(void)
     Paint_SelectImage(RedImage);
     Paint_Clear(WHITE);
    
-#if 1   //show image for array
+#if 0   //show image for array
     printf("show image for array------------------------\r\n");
     Paint_SelectImage(BlackImage);
     Paint_DrawBitMap(IMAGE_BLACK);
@@ -156,6 +166,7 @@ int main(void)
   {
 
   /* USER CODE END WHILE */
+  LED_BLINK();
 
   /* USER CODE BEGIN 3 */
 
@@ -230,6 +241,7 @@ void _Error_Handler(char *file, int line)
   /* User can add his own implementation to report the HAL error return state */
   while(1)
   {
+      LED_BLINK();
   }
   /* USER CODE END Error_Handler_Debug */
 }

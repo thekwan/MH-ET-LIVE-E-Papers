@@ -29,6 +29,7 @@
 void MX_GPIO_Init(void);
 
 /* USER CODE BEGIN Prototypes */
+void LED_BLINK(void);
 
 /* USER CODE END Prototypes */
 

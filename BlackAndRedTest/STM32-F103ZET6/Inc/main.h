@@ -27,6 +27,8 @@
 #define BUSY_GPIO_Port GPIOA
 #define SPI_CS_Pin GPIO_PIN_4
 #define SPI_CS_GPIO_Port GPIOA
+#define LED_GPIO_Port GPIOC
+#define LED_Pin GPIO_PIN_13
 
 /* ########################## Assert Selection ############################## */
 /**
