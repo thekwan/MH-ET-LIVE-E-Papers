@@ -87,8 +87,11 @@ int main(void)
     if(EPD_Init()) {
         printf("e-Paper init failed\r\n");
     }
-    EPD_Clear();
+    //EPD_Clear();
+    EPD_clearScreenWhite(0x00);
     DEV_Delay_ms(200);
+
+    LED_BLINK();
 
     //Create a new image cache named IMAGE_BW and fill it with white
     UBYTE *BlackImage, *RedImage;
