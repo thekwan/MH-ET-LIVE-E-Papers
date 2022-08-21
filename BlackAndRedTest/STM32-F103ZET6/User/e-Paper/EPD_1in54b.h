@@ -37,7 +37,7 @@
 
 // Display resolution
 #define EPD_WIDTH       250
-#define EPD_HEIGHT      128
+#define EPD_HEIGHT      122
 #define EPD_HEIGHT_VISIBLE  122 // need(?)
 //#define EPD_WIDTH       104
 //#define EPD_HEIGHT      212

@@ -109,12 +109,12 @@ parameter:
 ******************************************************************************/
 void EPD_Reset(void)
 {
-    //DEV_Digital_Write(EPD_RST_PIN, 1);
-    //DEV_Delay_ms(200);
-    //DEV_Digital_Write(EPD_RST_PIN, 0);
-    //DEV_Delay_ms(200);
-    //DEV_Digital_Write(EPD_RST_PIN, 1);
-    //DEV_Delay_ms(200);
+    DEV_Digital_Write(EPD_RST_PIN, 1);
+    DEV_Delay_ms(200);
+    DEV_Digital_Write(EPD_RST_PIN, 0);
+    DEV_Delay_ms(200);
+    DEV_Digital_Write(EPD_RST_PIN, 1);
+    DEV_Delay_ms(200);
     
     DEV_Delay_ms(10);       // 10ms according to specs
     EPD_SendCommand(0x12);  // SWRESET
@@ -228,6 +228,7 @@ static void EPD_WaitUntilIdle(void)
 function :	Set the look-up black and white tables
 parameter:
 ******************************************************************************/
+#if 0
 static void EPD_SetLutBw(void)
 {
     UWORD count;
@@ -252,11 +253,13 @@ static void EPD_SetLutBw(void)
         EPD_SendData(lut_g2[count]);
     }
 }
+#endif
 
 /******************************************************************************
 function :	Set the look-up red tables
 parameter:
 ******************************************************************************/
+#if 0
 static void EPD_SetLutRed(void)
 {
     UWORD count;
@@ -273,6 +276,7 @@ static void EPD_SetLutRed(void)
         EPD_SendData(lut_red1[count]);
     }
 }
+#endif
 
 /******************************************************************************
 function :	Initialize the e-Paper register
@@ -282,6 +286,7 @@ UBYTE EPD_Init(void)
 {
     EPD_Reset();
 
+#if 0
     EPD_SendCommand(POWER_SETTING);
     EPD_SendData(0x07);
     EPD_SendData(0x00);
@@ -310,6 +315,7 @@ UBYTE EPD_Init(void)
 
     EPD_SetLutBw();
     EPD_SetLutRed();
+#endif
 
     return 0;
 }
