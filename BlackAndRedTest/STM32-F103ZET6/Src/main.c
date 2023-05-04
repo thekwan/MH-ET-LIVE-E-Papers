@@ -88,10 +88,11 @@ int main(void)
         printf("e-Paper init failed\r\n");
     }
     //EPD_Clear();
-    EPD_clearScreenWhite(0x00);
+    //EPD_clearScreenWhite(0x00); // clear screen with black
+    EPD_clearScreenWhite(0xFF); // clear screen with white
     DEV_Delay_ms(200);
 
-    LED_BLINK();
+    //LED_BLINK();
 
     //Create a new image cache named IMAGE_BW and fill it with white
     UBYTE *BlackImage, *RedImage;
@@ -112,7 +113,7 @@ int main(void)
     Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
     Paint_SelectImage(RedImage);
-    Paint_Clear(WHITE);
+    Paint_Clear(BLACK);
    
 #if 0   //show image for array
     printf("show image for array------------------------\r\n");
@@ -129,27 +130,29 @@ int main(void)
 #if 1   //Drawing
     printf("Drawing------------------------\r\n");
     Paint_SelectImage(BlackImage);
-    Paint_Clear(WHITE);
+    //Paint_Clear(WHITE);
     Paint_DrawPoint(5, 10, BLACK, DOT_PIXEL_1X1, DOT_STYLE_DFT);
     Paint_DrawPoint(5, 25, BLACK, DOT_PIXEL_2X2, DOT_STYLE_DFT);
     Paint_DrawLine(20, 10, 70, 60, BLACK, LINE_STYLE_SOLID, DOT_PIXEL_1X1);
     Paint_DrawLine(70, 10, 20, 60, BLACK, LINE_STYLE_SOLID, DOT_PIXEL_1X1);
-    Paint_DrawRectangle(20, 10, 70, 60, BLACK, DRAW_FILL_EMPTY, DOT_PIXEL_1X1);
-    Paint_DrawCircle(170, 85, 20, BLACK, DRAW_FILL_FULL, DOT_PIXEL_1X1);
     Paint_DrawString_EN(5, 70, "hello world", &Font16, WHITE, BLACK);
-    //Paint_DrawString_CN(5, 160, "ÑÅºÚ×ÖÌå", &Font24CN, WHITE, BLACK);
-    
-    Paint_SelectImage(RedImage);
-    Paint_Clear(WHITE);
-    Paint_DrawPoint(5, 40, BLACK, DOT_PIXEL_3X3, DOT_STYLE_DFT);
-    Paint_DrawPoint(5, 55, BLACK, DOT_PIXEL_4X4, DOT_STYLE_DFT);
-    Paint_DrawLine(170, 15, 170, 55, BLACK, LINE_STYLE_DOTTED, DOT_PIXEL_1X1);
-    Paint_DrawLine(150, 35, 190, 35, BLACK, LINE_STYLE_DOTTED, DOT_PIXEL_1X1);    
-    Paint_DrawRectangle(85, 10, 130, 60, BLACK, DRAW_FILL_FULL, DOT_PIXEL_1X1);
-    Paint_DrawCircle(170, 35, 20, BLACK, DRAW_FILL_EMPTY, DOT_PIXEL_1X1);    
-    Paint_DrawString_EN(5, 90, "MH-ET LIVE", &Font20, BLACK, WHITE);
-    Paint_DrawNum(5, 120, 123456789, &Font20, BLACK, WHITE);
-    //Paint_DrawString_CN(5, 135,"ÄãºÃabc", &Font12CN, BLACK, WHITE);
+
+    //Paint_DrawRectangle(20, 10, 70, 60, BLACK, DRAW_FILL_EMPTY, DOT_PIXEL_1X1);
+    //Paint_DrawCircle(170, 85, 20, BLACK, DRAW_FILL_FULL, DOT_PIXEL_1X1);
+    //Paint_DrawString_EN(5, 70, "hello world", &Font16, WHITE, BLACK);
+    ////Paint_DrawString_CN(5, 160, "ÑÅºÚ×ÖÌå", &Font24CN, WHITE, BLACK);
+    //
+    //Paint_SelectImage(RedImage);
+    //Paint_Clear(WHITE);
+    //Paint_DrawPoint(5, 40, BLACK, DOT_PIXEL_3X3, DOT_STYLE_DFT);
+    //Paint_DrawPoint(5, 55, BLACK, DOT_PIXEL_4X4, DOT_STYLE_DFT);
+    //Paint_DrawLine(170, 15, 170, 55, BLACK, LINE_STYLE_DOTTED, DOT_PIXEL_1X1);
+    //Paint_DrawLine(150, 35, 190, 35, BLACK, LINE_STYLE_DOTTED, DOT_PIXEL_1X1);    
+    //Paint_DrawRectangle(85, 10, 130, 60, BLACK, DRAW_FILL_FULL, DOT_PIXEL_1X1);
+    //Paint_DrawCircle(170, 35, 20, BLACK, DRAW_FILL_EMPTY, DOT_PIXEL_1X1);    
+    //Paint_DrawString_EN(5, 90, "MH-ET LIVE", &Font20, BLACK, WHITE);
+    //Paint_DrawNum(5, 120, 123456789, &Font20, BLACK, WHITE);
+    ////Paint_DrawString_CN(5, 135,"ÄãºÃabc", &Font12CN, BLACK, WHITE);
 
     EPD_Display(BlackImage, RedImage);
     DEV_Delay_ms(2000);

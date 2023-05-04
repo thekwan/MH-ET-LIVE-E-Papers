@@ -202,8 +202,9 @@ parameter:
 ******************************************************************************/
 void Paint_Clear(UWORD Color)
 {
-    for (UWORD Y = 0; Y < Paint.HeightByte; Y++) {
-        for (UWORD X = 0; X < Paint.WidthByte; X++ ) {//8 pixel =  1 byte
+    UWORD X, Y;
+    for (Y = 0; Y < Paint.HeightByte; Y++) {
+        for (X = 0; X < Paint.WidthByte; X++ ) {//8 pixel =  1 byte
             UDOUBLE Addr = X + Y*Paint.WidthByte;
             Paint.Image[Addr] = Color;
         }

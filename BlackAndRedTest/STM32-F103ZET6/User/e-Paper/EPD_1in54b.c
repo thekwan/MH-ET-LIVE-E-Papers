@@ -161,16 +161,17 @@ void EPD_Update_Part()
 
 void EPD_clearScreen(uint8_t black_value, uint8_t color_value)
 {
+  uint32_t i;
   //_initial_write = false; // initial full screen buffer clean done
   //EPD_Reset();  //_Init_Part();
   EPD_setPartialRamArea(0, 0, EPD_WIDTH, EPD_HEIGHT);
   EPD_SendCommand(0x24);
-  for (uint32_t i = 0; i < (uint32_t)EPD_WIDTH * (uint32_t)EPD_HEIGHT / 8; i++)
+  for (i = 0; i < (uint32_t)EPD_WIDTH * (uint32_t)EPD_HEIGHT / 8; i++)
   {
     EPD_SendData(black_value);
   }
   EPD_SendCommand(0x26);
-  for (uint32_t i = 0; i < (uint32_t)EPD_WIDTH * (uint32_t)EPD_HEIGHT / 8; i++)
+  for (i = 0; i < (uint32_t)EPD_WIDTH * (uint32_t)EPD_HEIGHT / 8; i++)
   {
     EPD_SendData(~color_value);
   }
@@ -179,7 +180,7 @@ void EPD_clearScreen(uint8_t black_value, uint8_t color_value)
 
 void EPD_clearScreenWhite(uint8_t value)
 {
-  EPD_clearScreen(value, 0xFF);
+  EPD_clearScreen(value, 0xff);
 }
 
 /******************************************************************************
@@ -326,15 +327,15 @@ parameter:
 ******************************************************************************/
 void EPD_Clear(void)
 {
-    UWORD Width, Height;
+    UWORD Width, Height, i, j;
     Width = (EPD_WIDTH % 8 == 0)? (EPD_WIDTH / 8 ): (EPD_WIDTH / 8 + 1);
     Height = EPD_HEIGHT;
 
     //send black data
     EPD_SendCommand(DATA_START_TRANSMISSION_1);
     DEV_Delay_ms(2);
-    for(UWORD i = 0; i < Height; i++) {
-        for(UWORD i = 0; i < Width; i++) {
+    for(i = 0; i < Height; i++) {
+        for(j = 0; j < Width; j++) {
             EPD_SendData(0xFF);
             EPD_SendData(0xFF);
         }
@@ -344,8 +345,8 @@ void EPD_Clear(void)
     //send red data
     EPD_SendCommand(DATA_START_TRANSMISSION_2);
     DEV_Delay_ms(2);
-    for(UWORD i = 0; i < Height; i++) {
-        for(UWORD i = 0; i < Width; i++) {
+    for(i = 0; i < Height; i++) {
+        for(j = 0; j < Width; j++) {
             EPD_SendData(0xFF);
         }
     }
@@ -359,25 +360,26 @@ void EPD_Clear(void)
 function :	Sends the image buffer in RAM to e-Paper and displays
 parameter:
 ******************************************************************************/
+#if 0
 void EPD_Display(const UBYTE *blackimage, const UBYTE *redimage)
 {
     UBYTE Temp = 0x00;
-    UWORD Width, Height;
+    UWORD Width, Height, i, j, bit;
     Width = (EPD_WIDTH % 8 == 0)? (EPD_WIDTH / 8 ): (EPD_WIDTH / 8 + 1);
     Height = EPD_HEIGHT;
 
     EPD_SendCommand(DATA_START_TRANSMISSION_1);
-    for (UWORD j = 0; j < Height; j++) {
-        for (UWORD i = 0; i < Width; i++) {
+    for (j = 0; j < Height; j++) {
+        for (i = 0; i < Width; i++) {
             Temp = 0x00;
-            for (int bit = 0; bit < 4; bit++) {
+            for (bit = 0; bit < 4; bit++) {
                 if ((blackimage[i + j * Width] & (0x80 >> bit)) != 0) {
                     Temp |= 0xC0 >> (bit * 2);
                 }
             }
             EPD_SendData(Temp);
             Temp = 0x00;
-            for (int bit = 4; bit < 8; bit++) {
+            for (bit = 4; bit < 8; bit++) {
                 if ((blackimage[i + j * Width] & (0x80 >> bit)) != 0) {
                     Temp |= 0xC0 >> ((bit - 4) * 2);
                 }
@@ -388,8 +390,8 @@ void EPD_Display(const UBYTE *blackimage, const UBYTE *redimage)
     DEV_Delay_ms(2);
 
     EPD_SendCommand(DATA_START_TRANSMISSION_2);
-    for (UWORD j = 0; j < Height; j++) {
-        for (UWORD i = 0; i < Width; i++) {
+    for (j = 0; j < Height; j++) {
+        for (i = 0; i < Width; i++) {
             EPD_SendData(redimage[i + j * Width]);
         }
     }
@@ -400,6 +402,55 @@ void EPD_Display(const UBYTE *blackimage, const UBYTE *redimage)
     EPD_WaitUntilIdle();
 
 }
+#else
+void EPD_Display(const UBYTE *blackimage, const UBYTE *redimage)
+{
+    UBYTE Temp = 0x00;
+    UWORD Width, Height, i, j, bit;
+    Width = (EPD_WIDTH % 8 == 0)? (EPD_WIDTH / 8 ): (EPD_WIDTH / 8 + 1);
+    Height = EPD_HEIGHT;
+
+    EPD_setPartialRamArea(0, 0, EPD_WIDTH, EPD_HEIGHT);
+    EPD_SendCommand(0x24);
+    for (j = 0; j < Height; j++) {
+        for (i = 0; i < Width; i++) {
+            Temp = 0x00;
+            for (bit = 0; bit < 4; bit++) {
+                if ((blackimage[i + j * Width] & (0x80 >> bit)) != 0) {
+                    Temp |= 0xC0 >> (bit * 2);
+                }
+            }
+            EPD_SendData(Temp);
+            Temp = 0x00;
+            for (bit = 4; bit < 8; bit++) {
+                if ((blackimage[i + j * Width] & (0x80 >> bit)) != 0) {
+                    Temp |= 0xC0 >> ((bit - 4) * 2);
+                }
+            }
+            EPD_SendData(Temp);
+        }
+    }
+    DEV_Delay_ms(2);
+
+    EPD_SendCommand(0x26);
+    for (j = 0; j < Height; j++) {
+        for (i = 0; i < Width; i++) {
+            EPD_SendData(redimage[i + j * Width]);
+        }
+    }
+    DEV_Delay_ms(2);
+    
+    //Display refresh
+    //EPD_SendCommand(DISPLAY_REFRESH);
+    EPD_SendCommand(BOOSTER_SOFT_START);
+    EPD_SendCommand(0x22);
+    EPD_SendData(0xf7);
+    EPD_SendCommand(0x20);
+    EPD_WaitUntilIdle();
+
+
+}
+#endif
 
 /******************************************************************************
 function :	Enter sleep mode

@@ -36,9 +36,15 @@
 #include "DEV_Config.h"
 
 // Display resolution
+#if 0
 #define EPD_WIDTH       250
 #define EPD_HEIGHT      122
 #define EPD_HEIGHT_VISIBLE  122 // need(?)
+#else
+#define EPD_WIDTH       128
+#define EPD_HEIGHT      250
+//#define EPD_HEIGHT_VISIBLE  122 // need(?)
+#endif
 //#define EPD_WIDTH       104
 //#define EPD_HEIGHT      212
 
