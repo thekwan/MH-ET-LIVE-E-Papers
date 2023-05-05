@@ -135,7 +135,8 @@ int main(void)
     Paint_DrawPoint(5, 25, BLACK, DOT_PIXEL_2X2, DOT_STYLE_DFT);
     Paint_DrawLine(20, 10, 70, 60, BLACK, LINE_STYLE_SOLID, DOT_PIXEL_1X1);
     Paint_DrawLine(70, 10, 20, 60, BLACK, LINE_STYLE_SOLID, DOT_PIXEL_1X1);
-    Paint_DrawString_EN(5, 70, "hello world", &Font16, WHITE, BLACK);
+    Paint_DrawString_EN(5, 70, "I love Juyoon!", &Font16, WHITE, BLACK);
+    Paint_DrawString_EN(5, 90, "I love Hyeyeon!", &Font16, WHITE, BLACK);
 
     //Paint_DrawRectangle(20, 10, 70, 60, BLACK, DRAW_FILL_EMPTY, DOT_PIXEL_1X1);
     //Paint_DrawCircle(170, 85, 20, BLACK, DRAW_FILL_FULL, DOT_PIXEL_1X1);

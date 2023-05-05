@@ -405,8 +405,8 @@ void EPD_Display(const UBYTE *blackimage, const UBYTE *redimage)
 #else
 void EPD_Display(const UBYTE *blackimage, const UBYTE *redimage)
 {
-    UBYTE Temp = 0x00;
-    UWORD Width, Height, i, j, bit;
+    //UBYTE Temp = 0x00;
+    UWORD Width, Height, i, j;//, bit;
     Width = (EPD_WIDTH % 8 == 0)? (EPD_WIDTH / 8 ): (EPD_WIDTH / 8 + 1);
     Height = EPD_HEIGHT;
 
@@ -414,6 +414,7 @@ void EPD_Display(const UBYTE *blackimage, const UBYTE *redimage)
     EPD_SendCommand(0x24);
     for (j = 0; j < Height; j++) {
         for (i = 0; i < Width; i++) {
+#if 0
             Temp = 0x00;
             for (bit = 0; bit < 4; bit++) {
                 if ((blackimage[i + j * Width] & (0x80 >> bit)) != 0) {
@@ -428,6 +429,8 @@ void EPD_Display(const UBYTE *blackimage, const UBYTE *redimage)
                 }
             }
             EPD_SendData(Temp);
+#endif
+            EPD_SendData(blackimage[i + j * Width]);
         }
     }
     DEV_Delay_ms(2);
