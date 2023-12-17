@@ -36,11 +36,8 @@
 #include "DEV_Config.h"
 
 // Display resolution
-#define EPD_WIDTH       250
-#define EPD_HEIGHT      122
-#define EPD_HEIGHT_VISIBLE  122 // need(?)
-//#define EPD_WIDTH       104
-//#define EPD_HEIGHT      212
+#define EPD_WIDTH       128     // it should be multiple of 8.
+#define EPD_HEIGHT      250
 
 // EPD1IN54B commands
 #define PANEL_SETTING                               0x00
@@ -79,6 +76,8 @@ void EPD_Display(const UBYTE *blackimage, const UBYTE *redimage);
 void EPD_Sleep(void);
 
 void EPD_Reset(void);
-void EPD_clearScreenWhite(uint8_t value);
+void EPD_clearScreenWhite();
+void EPD_clearScreenBlack();
+void EPD_clearScreenRed();
 
 #endif

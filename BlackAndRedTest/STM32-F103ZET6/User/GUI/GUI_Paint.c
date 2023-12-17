@@ -71,6 +71,7 @@ void Paint_NewImage(UBYTE *image, UWORD Width, UWORD Height, UWORD Rotate, UWORD
     Paint.Color = Color;    
     Paint.WidthByte = (Width % 8 == 0)? (Width / 8 ): (Width / 8 + 1);
     Paint.HeightByte = Height;    
+
     printf("WidthByte = %d, HeightByte = %d\r\n", Paint.WidthByte, Paint.HeightByte);
     printf(" EPD_WIDTH / 8 = %d\r\n",  122 / 8);
    
@@ -202,12 +203,14 @@ parameter:
 ******************************************************************************/
 void Paint_Clear(UWORD Color)
 {
+    printf("Paint_Clear::start\r\n");
     for (UWORD Y = 0; Y < Paint.HeightByte; Y++) {
         for (UWORD X = 0; X < Paint.WidthByte; X++ ) {//8 pixel =  1 byte
             UDOUBLE Addr = X + Y*Paint.WidthByte;
             Paint.Image[Addr] = Color;
         }
     }
+    printf("Paint_Clear::end\r\n");
 }
 
 /******************************************************************************

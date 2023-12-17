@@ -88,16 +88,20 @@ parameter:
 ******************************************************************************/
 void EPD_setPartialRamArea(uint16_t x, uint16_t y, uint16_t w, uint16_t h)
 {
+    // specify start/end position of window address in X direction
     EPD_SendCommand(0x44);
     EPD_SendData(x / 8);
     EPD_SendData((x + w - 1) / 8);
+    // specify start/end position of window address in Y direction
     EPD_SendCommand(0x45);
     EPD_SendData(y % 256);
     EPD_SendData(y / 256);
     EPD_SendData((y + h - 1) % 256);
     EPD_SendData((y + h - 1) / 256);
+    // set RAM X address count
     EPD_SendCommand(0x4e);
     EPD_SendData(x / 8);
+    // set RAM Y address count
     EPD_SendCommand(0x4f);
     EPD_SendData(y % 256);
     EPD_SendData(y / 256);
@@ -136,8 +140,8 @@ void EPD_Reset(void)
 
     // Power ON procedure
     EPD_SendCommand(0x22);
-    EPD_SendData(0xf8);
-    EPD_SendCommand(0x20);
+    EPD_SendData(0xf8);     // TODO: check the value! (data-sheet)
+    EPD_SendCommand(0x20);  // Activate display update sequence.
 
     EPD_WaitUntilIdle();
 }
@@ -152,36 +156,49 @@ void EPD_Update_Full()
 
 void EPD_Update_Part()
 {
+  printf("EPD_Update_Part::start\r\n");
   EPD_SendCommand(0x22);
   EPD_SendData(0xf7);
   EPD_SendCommand(0x20);
   //EPD_WaitUntilIdle("_Update_Part", partial_refresh_time);
   EPD_WaitUntilIdle();//"_Update_Part", 15000);
+  printf("EPD_Update_Part::end\r\n");
 }
 
 void EPD_clearScreen(uint8_t black_value, uint8_t color_value)
 {
+  printf("EPD_clearScreen::start\r\n");
   //_initial_write = false; // initial full screen buffer clean done
   //EPD_Reset();  //_Init_Part();
   EPD_setPartialRamArea(0, 0, EPD_WIDTH, EPD_HEIGHT);
   EPD_SendCommand(0x24);
-  for (uint32_t i = 0; i < (uint32_t)EPD_WIDTH * (uint32_t)EPD_HEIGHT / 8; i++)
+  for (uint32_t i = 0; i < ((uint32_t)(EPD_WIDTH) * (uint32_t)EPD_HEIGHT) / 8; i++)
   {
     EPD_SendData(black_value);
   }
   EPD_SendCommand(0x26);
-  for (uint32_t i = 0; i < (uint32_t)EPD_WIDTH * (uint32_t)EPD_HEIGHT / 8; i++)
+  for (uint32_t i = 0; i < ((uint32_t)(EPD_WIDTH/8) * (uint32_t)EPD_HEIGHT) / 8; i++)
   {
-    EPD_SendData(~color_value);
+    EPD_SendData(color_value);
   }
   EPD_Update_Part();
+  printf("EPD_clearScreen::end\r\n");
 }
 
-void EPD_clearScreenWhite(uint8_t value)
+void EPD_clearScreenWhite()
 {
-  EPD_clearScreen(value, 0xFF);
+  EPD_clearScreen(0x01, 0x00);
 }
 
+void EPD_clearScreenBlack()
+{
+  EPD_clearScreen(0x00, 0x00);
+}
+
+void EPD_clearScreenRed()
+{
+  EPD_clearScreen(0x00, 0xff);
+}
 /******************************************************************************
 function :	send command
 parameter:
@@ -285,6 +302,7 @@ parameter:
 UBYTE EPD_Init(void)
 {
     EPD_Reset();
+    printf("EPD_Init::end\r\n");
 
 #if 0
     EPD_SendCommand(POWER_SETTING);
@@ -361,10 +379,13 @@ parameter:
 ******************************************************************************/
 void EPD_Display(const UBYTE *blackimage, const UBYTE *redimage)
 {
+    printf("EPD_Display::start\r\n");
     UBYTE Temp = 0x00;
     UWORD Width, Height;
     Width = (EPD_WIDTH % 8 == 0)? (EPD_WIDTH / 8 ): (EPD_WIDTH / 8 + 1);
     Height = EPD_HEIGHT;
+
+    printf("EPD_Display::DATA_START_TRANSMISSION_1\r\n");
 
     EPD_SendCommand(DATA_START_TRANSMISSION_1);
     for (UWORD j = 0; j < Height; j++) {
@@ -387,6 +408,8 @@ void EPD_Display(const UBYTE *blackimage, const UBYTE *redimage)
     }
     DEV_Delay_ms(2);
 
+    printf("EPD_Display::DATA_START_TRANSMISSION_2\r\n");
+
     EPD_SendCommand(DATA_START_TRANSMISSION_2);
     for (UWORD j = 0; j < Height; j++) {
         for (UWORD i = 0; i < Width; i++) {
@@ -399,6 +422,7 @@ void EPD_Display(const UBYTE *blackimage, const UBYTE *redimage)
     EPD_SendCommand(DISPLAY_REFRESH);
     EPD_WaitUntilIdle();
 
+    printf("EPD_Display::end\r\n");
 }
 
 /******************************************************************************
